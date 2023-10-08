@@ -35,6 +35,9 @@ if ($handle) {
       if (empty($campos[6])) {
          $campos[6] = "NULL";
       }
+      else {
+         $campos[6] = '"' . $campos[6] . '"';
+      }
       if ($contador_sql == 0) {
          // Iniciar a query
          $query = $inicio_query . "(" . implode(",", $campos) . ")";
