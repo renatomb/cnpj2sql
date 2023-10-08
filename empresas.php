@@ -18,7 +18,7 @@ $inicio_query="INSERT INTO empresas (cnpj_basico, razao_social, natureza_juridic
 if ($handle) {
    while (($line = fgets($handle)) !== false) {
       // separar os campos por ;
-      $campos = explode(";", $line);
+      $campos = explode('";"', $line);
       for ($i=0;$i<count($campos);$i++) {
          if ($i != 1) { 
             // não remover aspas da razão social
@@ -51,7 +51,7 @@ if ($handle) {
          $query .= ", (" . implode(",", $campos) . ")";
       }
       $contador_sql++;
-      if ($contador_sql == 500) {
+      if ($contador_sql == 1000) {
          // Gravar no arquivo SQL
          fwrite($gravacao, $query . ";\n");
          echo ".";
