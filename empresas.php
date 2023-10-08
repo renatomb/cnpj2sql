@@ -31,6 +31,10 @@ if ($handle) {
       }
       // Remover quebra de linha do ultimo campo
       $campos[6] = str_replace("\n", "", $campos[6]);
+      // Tratamento dos casos onde o porte está vazio
+      if (empty($campos[5])) {
+         $campos[5] = "NULL";
+      }
       // Ultimo campo pode ser vazio, converter para null
       if (empty($campos[6])) {
          $campos[6] = "NULL";
