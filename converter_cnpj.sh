@@ -12,6 +12,7 @@ ICNPJ=$(pwd)
 
 # uma vez feito o download do arquivo só me interessa os arquivos .zip
 mkdir $ICNPJ/200.152.38.155/zip
+mkdir $ICNPJ/200.152.38.155/sql
 mv $ICNPJ/200.152.38.155/CNPJ/*.zip $ICNPJ/200.152.38.155/zip/
 mv $ICNPJ/200.152.38.155/CNPJ/regime_tributario/*.zip $ICNPJ/200.152.38.155/zip/
 
@@ -27,3 +28,19 @@ for file in $ICNPJ/200.152.38.155/zip/Empresas*.zip; do
   done
   rm -f "$file"
 done
+mv *.sql $ICNPJ/200.152.38.155/sql/
+
+
+for file in $ICNPJ/200.152.38.155/zip/Estabelecimentos*.zip; do
+  unzip "$file"
+  for arquivo in *ESTABELE; do
+    echo "Processando dados de $arquivo:"
+    iconv -f iso-8859-1 -t utf-8 "$arquivo" > "estabelecimentos.csv"
+    rm -f $arquivo
+    php estabelecimentos.php $arquivo
+    rm -f estabelecimentos.csv
+  done
+  rm -f "$file"
+done
+mv *.sql $ICNPJ/200.152.38.155/sql/
+

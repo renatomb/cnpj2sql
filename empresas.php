@@ -32,9 +32,7 @@ if ($handle) {
          }
       }
       // Tratamento dos casos onde o porte está vazio
-      if (empty($campos[5])) {
-         $campos[5] = "NULL";
-      }
+      $campos[5] = vazio_null($campos[5]);
       if ($contador_sql == 0) {
          // Iniciar a query
          $query = $inicio_query . "(" . implode(",", $campos) . ")";
