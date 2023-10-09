@@ -20,27 +20,18 @@ if ($handle) {
       // separar os campos por ;
       $campos = explode('";"', $line);
       for ($i=0;$i<count($campos);$i++) {
-         if ($i != 1) { 
-            // não remover aspas da razão social
-            $campos[$i] = remove_aspas($campos[$i]);
+         $campos[$i] = remove_aspas($campos[$i]);
+         if (($i == 1) || ($i == 6)) {
+            $campos[$i] = aspas($campos[$i]);
          }
          if ($i == 4) {
             // Trocar virgula por ponto no capital social
             $campos[$i] = troca_virgula_ponto($campos[$i]);
          }
       }
-      // Remover quebra de linha do ultimo campo
-      $campos[6] = str_replace("\n", "", $campos[6]);
       // Tratamento dos casos onde o porte está vazio
       if (empty($campos[5])) {
          $campos[5] = "NULL";
-      }
-      // Ultimo campo pode ser vazio, converter para null
-      if (empty($campos[6])) {
-         $campos[6] = "NULL";
-      }
-      else {
-         $campos[6] = '"' . $campos[6] . '"';
       }
       if ($contador_sql == 0) {
          // Iniciar a query
@@ -68,11 +59,21 @@ else {
 }
 
 function remove_aspas($texto) {
-    return str_replace('"', '', $texto);
+    return addslashes(str_replace('"', '', $texto));
 }
 
 function troca_virgula_ponto($texto) {
     return str_replace(',', '.', $texto);
+}
+
+function aspas($texto) {
+   $texto=trim($texto);
+   if (empty($texto)) {
+      return "NULL";
+   }
+   else {
+      return '"' . $texto . '"';
+   }
 }
 
 ?>
