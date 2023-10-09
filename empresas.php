@@ -6,6 +6,8 @@ Script para processamento dos dados das empresas dos arquvios CSV do CNPJ da rec
 https://github.com/renatomb/cnpj2sql
 */
 
+require_once("funcoes.php");
+
 // Abrir o arquivo CSV empresas.csv
 $handle = fopen("empresas.csv", "r");
 // Abrir o arquivo SQL para gravacao acrescentando os dados ao final do arquivo 
@@ -56,24 +58,6 @@ if ($handle) {
 } 
 else {
    die("erro abrindo o arquivo " . $argv[1] . "\n");
-}
-
-function remove_aspas($texto) {
-    return addslashes(str_replace('"', '', $texto));
-}
-
-function troca_virgula_ponto($texto) {
-    return str_replace(',', '.', $texto);
-}
-
-function aspas($texto) {
-   $texto=trim($texto);
-   if (empty($texto)) {
-      return "NULL";
-   }
-   else {
-      return '"' . $texto . '"';
-   }
 }
 
 ?>
