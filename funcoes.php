@@ -24,14 +24,16 @@ function aspas($texto) {
    }
 }
 
-function vazio_null($texto) {
-  $texto=trim($texto);
-  if (empty($texto)) {
-     return "NULL";
-  }
-  else {
-     return $texto;
-  }
+function vazio_null($texto) { 
+   $texto=trim($texto);
+   // Remove qualquer caractere nao-numerico do texto
+   $texto=preg_replace('/[^0-9]/', '', $texto);
+   if (empty($texto)) {
+      return "NULL";
+   }
+   else {
+      return $texto;
+   }
 }
 
 function data_sql($texto) {
