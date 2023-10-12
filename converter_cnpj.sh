@@ -20,11 +20,7 @@ mv $ICNPJ/200.152.38.155/CNPJ/regime_tributario/*.zip $ICNPJ/200.152.38.155/zip/
 for file in $ICNPJ/200.152.38.155/zip/Empresas*.zip; do
   unzip "$file"
   for arquivo in *CSV; do
-    echo "Processando dados de $arquivo:"
-    iconv -f iso-8859-1 -t utf-8 "$arquivo" > "empresas.csv"
-    rm -f "$arquivo"
-    php empresas.php $arquivo
-    rm -f empresas.csv
+    echo "Convertendo condificacao de $arquivo:" && iconv -f iso-8859-1 -t utf-8 "$arquivo" > "$arquivo.csv" && rm -f "$arquivo"  && echo "Processando empresas $arquivo.csv:"  && php empresas.php $arquivo && rm -f empresas.csv &
   done
   rm -f "$file"
 done
@@ -34,13 +30,8 @@ mv *.sql $ICNPJ/200.152.38.155/sql/
 for file in $ICNPJ/200.152.38.155/zip/Estabelecimentos*.zip; do
   unzip "$file"
   for arquivo in *ESTABELE; do
-    echo "Processando dados de $arquivo:"
-    iconv -f iso-8859-1 -t utf-8 "$arquivo" > "estabelecimentos.csv"
-    rm -f $arquivo
-    php estabelecimentos.php $arquivo
-    rm -f estabelecimentos.csv
+    echo "Convertendo condificacao de $arquivo:" && iconv -f iso-8859-1 -t utf-8 "$arquivo" > "$arquivo.csv" && rm -f $arquivo && echo "Processando estabelecimentos $arquivo.csv:" && php estabelecimentos.php $arquivo && rm -f $arquivo.csv &
   done
   rm -f "$file"
 done
 mv *.sql $ICNPJ/200.152.38.155/sql/
-

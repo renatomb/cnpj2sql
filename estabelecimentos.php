@@ -8,8 +8,8 @@ https://github.com/renatomb/cnpj2sql
 
 require_once("funcoes.php");
 
-// Abrir o arquivo CSV empresas.csv
-$handle = fopen("estabelecimentos.csv", "r");
+// Abrir o arquivo CSV .csv
+$handle = fopen($argv[1] . ".csv", "r");
 // Abrir o arquivo SQL para gravacao acrescentando os dados ao final do arquivo 
 // Nome do arquivo sera passado por parametro
 $gravacao = fopen($argv[1] . ".sql", "a");
