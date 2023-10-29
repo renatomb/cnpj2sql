@@ -64,7 +64,6 @@ if ($handle) {
       }
       else {
          // Continuar a query
-         print_r($campos);
          $query .= ", (" . implode(",", $campos) . ")";
       }
       $contador_sql++;
