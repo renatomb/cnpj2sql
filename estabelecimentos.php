@@ -39,14 +39,6 @@ if ($handle) {
          // Tratamento dos campos numéricos que permitem NULO
          if ((in_array($i, array(9,18,21,22,23,24,25,26)))) {
             if (in_array($i, array(21,23,25))) {
-               // Tratamento dos campos DDD de telefone
-/*               if (intval($campos[$i]) > 99) {
-                  echo "DDD acima de 99 detectado! " . $campos[$i] . "\n";
-                  echo "Linha $contador_sql: " . $line . "\n";
-                  print_r($campos);
-                  print_r($nomes_colunas);
-                  die;
-               }*/
                $campos[$i] = intval($campos[$i]);
 
             }
@@ -68,7 +60,11 @@ if ($handle) {
          echo ".";
          $contador_sql=0;
       }
-      
+   }
+   if ($contador_sql > 0) {
+      // Gravar no arquivo SQL
+      fwrite($gravacao, $query . ";\n");
+      echo ".";
    }
    // Fechar os arquivos
    fclose($handle);
