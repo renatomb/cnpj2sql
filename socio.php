@@ -1,7 +1,7 @@
 <?php
 
 /*
-Script para processamento dos dados dos estabelecimentos dos arquvios CSV do CNPJ da receita federal
+Script para processamento dos dados dos socios dos arquvios CSV do CNPJ da receita federal
 (C) 2023 - Renato Monteiro Batista
 https://github.com/renatomb/cnpj2sql
 */
