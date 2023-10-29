@@ -36,9 +36,19 @@ function vazio_null($texto) {
    }
 }
 
+function simnao($texto) {
+   $texto=trim($texto);
+   if ($texto == "S") {
+      return "1";
+   }
+   else {
+      return "0";
+   }
+}
+
 function data_sql($texto) {
    /* Converte data AAAAMMDD para formato SQL */
-   if (empty($texto)) {
+   if (empty($texto) || $texto == "00000000") {
       return "NULL";
    }
    else {
