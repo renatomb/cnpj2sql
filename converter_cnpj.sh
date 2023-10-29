@@ -26,7 +26,6 @@ for file in $ICNPJ/200.152.38.155/zip/Empresas*.zip; do
 done
 mv *.sql $ICNPJ/200.152.38.155/sql/
 
-
 for file in $ICNPJ/200.152.38.155/zip/Estabelecimentos*.zip; do
   unzip "$file"
   for arquivo in *ESTABELE; do
@@ -43,3 +42,32 @@ for file in $ICNPJ/200.152.38.155/zip/Socios*.zip; do
   done
   rm -f "$file"
 done
+mv *.sql $ICNPJ/200.152.38.155/sql/
+
+for file in $ICNPJ/200.152.38.155/zip/Simple*.zip; do
+  unzip "$file"
+  for arquivo in *SIMPLES*; do
+    echo "Convertendo condificacao de $arquivo:" && iconv -f iso-8859-1 -t utf-8 "$arquivo" > "simples.csv" && rm -f $arquivo && echo "Processando simples simples.csv:" && php simples.php simples && rm -f simples.csv &
+  done  
+  rm -f "$file"
+done
+mv *.sql $ICNPJ/200.152.38.155/sql/
+
+for file in $ICNPJ/200.152.38.155/zip/*s.zip; do
+  unzip "$file"
+  rm -f "$file"
+done
+
+function auxiliar() {
+  local arquivo=$1
+  echo "Convertendo condificacao para $arquivo.csv" && iconv -f iso-8859-1 -t utf-8 "$arquivo" > "$arquivo.csv" && rm -f $arquivo && echo "Processando auxiliar $arquivo.csv:" && php id-nome.php $arquivo && rm -f $arquivo.csv &
+}
+
+echo "Renomeando arquivos das tabelas auxiliares"
+mv *CNAECSV CNAECSV && auxiliar CNAECSV &
+mv *MUNICCSV MUNICCSV && auxiliar MUNICCSV &
+mv *MOTICSV MOTICSV && auxiliar MOTICSV &
+mv *NATJUCSV NATJUCSV && auxiliar NATJUCSV &
+mv *PAISCSV PAISCSV && auxiliar PAISCSV &
+mv *QUALSCSV QUALSCSV && auxiliar QUALSCSV &
+mv *.sql $ICNPJ/200.152.38.155/sql/
