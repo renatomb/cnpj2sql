@@ -35,3 +35,11 @@ for file in $ICNPJ/200.152.38.155/zip/Estabelecimentos*.zip; do
   rm -f "$file"
 done
 mv *.sql $ICNPJ/200.152.38.155/sql/
+
+for file in $ICNPJ/200.152.38.155/zip/Socios*.zip; do
+  unzip "$file"
+  for arquivo in *SOCIOCSV; do
+    echo "Convertendo condificacao de $arquivo:" && iconv -f iso-8859-1 -t utf-8 "$arquivo" > "$arquivo.csv" && rm -f $arquivo && echo "Processando socios $arquivo.csv:" && php socio.php $arquivo && rm -f $arquivo.csv &
+  done
+  rm -f "$file"
+done
