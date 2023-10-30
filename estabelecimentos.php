@@ -64,7 +64,7 @@ if ($handle) {
    if ($contador_sql > 0) {
       // Gravar no arquivo SQL
       fwrite($gravacao, $query . ";\n");
-      echo ".";
+      echo "T";
    }
    // Fechar os arquivos
    fclose($handle);

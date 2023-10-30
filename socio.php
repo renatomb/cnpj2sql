@@ -64,7 +64,7 @@ if ($handle) {
       if ($contador_sql == 1000) {
          // Gravar no arquivo SQL
          fwrite($gravacao, $query . ";\n");
-         echo ".";
+         echo "O";
          $contador_sql=0;
       }
    }
