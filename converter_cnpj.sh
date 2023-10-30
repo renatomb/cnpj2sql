@@ -24,7 +24,7 @@ for file in $ICNPJ/200.152.38.155/zip/Empresas*.zip; do
   done
   rm -f "$file"
 done
-mv *.sql $ICNPJ/200.152.38.155/sql/
+mv *EMPRECSV.sql $ICNPJ/200.152.38.155/sql/
 
 for file in $ICNPJ/200.152.38.155/zip/Estabelecimentos*.zip; do
   unzip "$file"
@@ -33,7 +33,7 @@ for file in $ICNPJ/200.152.38.155/zip/Estabelecimentos*.zip; do
   done
   rm -f "$file"
 done
-mv *.sql $ICNPJ/200.152.38.155/sql/
+mv *ESTABELE.sql $ICNPJ/200.152.38.155/sql/
 
 for file in $ICNPJ/200.152.38.155/zip/Socios*.zip; do
   unzip "$file"
@@ -42,12 +42,18 @@ for file in $ICNPJ/200.152.38.155/zip/Socios*.zip; do
   done
   rm -f "$file"
 done
-mv *.sql $ICNPJ/200.152.38.155/sql/
+mv *SOCIOCSV.sql $ICNPJ/200.152.38.155/sql/
 
 for file in $ICNPJ/200.152.38.155/zip/Simple*.zip; do
   unzip "$file"
   for arquivo in *SIMPLES*; do
-    echo "Convertendo condificacao de $arquivo:" && iconv -f iso-8859-1 -t utf-8 "$arquivo" > "simples.csv" && rm -f $arquivo && echo "Processando simples simples.csv:" && php simples.php simples && rm -f simples.csv &
+    # renomear arquivos mantendo somente o que tem apos o ultimo ponto no nome do arquivo
+    novo=$(echo $arquivo | sed 's/.*\.//')
+    novonome=SIMPLESCSV-$novo
+    mv $arquivo $novonome
+  done
+  for arquivo in SIMPLESCSV*; do
+    echo "Convertendo condificacao de $arquivo:" && iconv -f iso-8859-1 -t utf-8 "$arquivo" > "$arquivo.csv" && rm -f $arquivo && echo "Processando simples $arquivo.csv:" && php simples.php $arquivo && rm -f $arquivo.csv &
   done  
   rm -f "$file"
 done
@@ -70,4 +76,4 @@ mv *MOTICSV MOTICSV && auxiliar MOTICSV &
 mv *NATJUCSV NATJUCSV && auxiliar NATJUCSV &
 mv *PAISCSV PAISCSV && auxiliar PAISCSV &
 mv *QUALSCSV QUALSCSV && auxiliar QUALSCSV &
-mv *.sql $ICNPJ/200.152.38.155/sql/
+mv *CSV.sql $ICNPJ/200.152.38.155/sql/
