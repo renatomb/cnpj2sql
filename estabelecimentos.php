@@ -15,7 +15,7 @@ $handle = fopen($argv[1] . ".csv", "r");
 $gravacao = fopen($argv[1] . ".sql", "a");
 $contador_sql=0;
 $nomes_colunas=array("cnpj_basico", "cnpj_id", "cnpj_dv", "matriz_filial", "nome_fantasia", "situacao_cadastral", "data_situacao_cadastral", "motivo_situacao_cadastral", "cidade_exterior", "cod_pais", "data_inicio_ativ", "cnae_fiscal", "cnae_secundario", "tipo_logradouro", "logradouro", "numero", "complemento", "bairro", "cep", "uf", "cod_municipio", "ddd_1", "telefone_1", "ddd_2", "telefone_2", "ddd_fax", "num_fax", "email");
-$inicio_query="INSERT INTO estabelecimentos (" .  implode(",", $nomes_colunas) . ") VALUES ";
+$inicio_query="REPLACE INTO estabelecimentos (" .  implode(",", $nomes_colunas) . ") VALUES ";
 
 // Ler o arquivo linha por linha e mostrar na tela
 if ($handle) {

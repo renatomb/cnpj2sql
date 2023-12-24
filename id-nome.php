@@ -38,7 +38,7 @@ switch($argv[1]) {
    default:
       die("Tabela nao encontrada\n");
 }
-$inicio_query="INSERT INTO $nome_tabela (" .  implode(",", $nomes_colunas) . ") VALUES ";
+$inicio_query="REPLACE INTO $nome_tabela (" .  implode(",", $nomes_colunas) . ") VALUES ";
 
 // Ler o arquivo linha por linha e mostrar na tela
 if ($handle) {

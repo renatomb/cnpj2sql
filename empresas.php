@@ -14,7 +14,7 @@ $handle = fopen($argv[1] . ".csv", "r");
 // Nome do arquivo sera passado por parametro
 $gravacao = fopen($argv[1] . ".sql", "a");
 $contador_sql=0;
-$inicio_query="INSERT INTO empresas (cnpj_basico, razao_social, natureza_juridica, qualif_juridica, capital_social, porte, ente_federativo_responsavel) VALUES ";
+$inicio_query="REPLACE INTO empresas (cnpj_basico, razao_social, natureza_juridica, qualif_juridica, capital_social, porte, ente_federativo_responsavel) VALUES ";
 
 // Ler o arquivo linha por linha e mostrar na tela
 if ($handle) {

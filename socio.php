@@ -15,7 +15,7 @@ $handle = fopen($argv[1] . ".csv", "r");
 $gravacao = fopen($argv[1] . ".sql", "a");
 $contador_sql=0;
 $nomes_colunas=array("cnpj_basico","identificador_socio","nome_socio","cnpj_socio","cod_qualificacao_socio","data_entrada_sociedade","perc_capital_social","cpf_representante_legal","nome_representante_legal","cod_qualificacao_representante_legal","desconhecido","cpf_socio_mascarado");
-$inicio_query="INSERT INTO socio (" .  implode(",", $nomes_colunas) . ") VALUES ";
+$inicio_query="REPLACE INTO socio (" .  implode(",", $nomes_colunas) . ") VALUES ";
 
 // Ler o arquivo linha por linha e mostrar na tela
 if ($handle) {
