@@ -9,4 +9,5 @@
 # Versão 1.0
 
 # Download (mirror) dos arquivos no portal de dados abertos da Receita Federal
-wget -N --mirror --convert-links --adjust-extension --page-requisites --no-parent http://200.152.38.155/CNPJ/
+# sudo apg-get install wget2 -y
+wget2 --max-threads=999 -N --mirror --convert-links --adjust-extension --page-requisites --no-parent http://200.152.38.155/CNPJ/
